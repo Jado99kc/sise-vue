@@ -1,7 +1,8 @@
 import firebase from "@/firebase";
 import router from "@/router";
 
-let provider = new firebase.auth.GoogleAuthProvider();
+// let provider = new firebase.auth.GoogleAuthProvider();
+const db = firebase.firestore()
 export default {
   namespaced: true,
   state: {
@@ -18,7 +19,9 @@ export default {
             credentials.email,
             credentials.password
           );
-        console.log(res.user);
+        // console.log(res.user);
+        await db.collection('Estudiantes').doc(res.user.uid).set({email:res.user.email})
+        await db.collection('Materias_Estudiante').doc(res.user.uid).set({materias:{}})
         commit("TOGGLE_NEW_USER");
         router.push("/login");
         return res.user;
@@ -37,18 +40,21 @@ export default {
         console.log(error);
       }
     },
-    async login({ commit }, credentials) {
+    async login({ commit, rootState }, credentials) {
       console.log("credenciales", credentials);
       try {
         const res = await firebase
           .auth()
           .signInWithEmailAndPassword(credentials.email, credentials.password);
+          let estudiante =  await db.collection('Estudiantes').doc(res.user.uid).get()
         const user = {
-          email: res.user.email,
-          id: res.user.uid,
+          ...estudiante.data(),
+          "id":res.user.uid
         };
+        // user.id = res.user.uid,
+        // commit('estudiantes/SET_ESTUDIANTE',user,{root:true} )
         commit("SET_USER", user);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify({email:res.user.email, id: res.user.uid}));
         router.push("/dashboard");
         return res.user;
       } catch (error) {
@@ -59,8 +65,10 @@ export default {
     validateSession({ commit }) {
       if (localStorage.getItem("user")) {
         commit("SET_USER", JSON.parse(localStorage.getItem("user")));
+        router.push("dashboard");
       } else {
         commit("SET_USER", null);
+        router.push("/login");
       }
     },
     logout({ commit }) {

@@ -51,7 +51,7 @@
         <v-toolbar-title>{{currentRouteName}}</v-toolbar-title>
       </v-app-bar>
     </div>
-    <v-main class="indigo darken-4">
+    <v-main class="blue-grey darken-3">
       <vue-page-transition name="fade-in-right">
         <router-view style="height: 100vh"></router-view>
       </vue-page-transition>
@@ -72,6 +72,7 @@ export default {
       { title: "Bandeja de Entrada", icon: "mdi-view-dashboard", link: '/dashboard' },
       { title: "Califiaciones", icon: "mdi-counter", link: '/calificaciones' },
       { title: "Estatus", icon: "mdi-state-machine", link: '/estatus' },
+      { title: "Materias", icon: "mdi-book-multiple", link: '/materias' },
     ],
     right: null,
   }),
@@ -92,9 +93,8 @@ export default {
         return this.$route.name;
     }
   },
-  async mounted() {
-    await this.validateSession();
-    this.$router.push("dashboard");
+  mounted() {
+    this.validateSession();
   },
 };
 </script>

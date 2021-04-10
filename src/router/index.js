@@ -49,6 +49,12 @@ const routes = [
     component: () => import('../views/Estatus.vue'),
     meta: {private: true}
   },
+  {
+    path: '/materias',
+    name: 'Materias',
+    component: () => import('../views/Materias.vue'),
+    meta: {private: true}
+  },
 ]
  
 
