@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: '/calificaciones',
-    name: 'Califiaciones',
+    name: 'Calificaciones',
     component: () => import('../views/Calificaciones.vue'),
     meta: {private: true}
   },
@@ -53,6 +53,12 @@ const routes = [
     path: '/materias',
     name: 'Materias',
     component: () => import('../views/Materias.vue'),
+    meta: {private: true}
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: () => import('../views/Help.vue'),
     meta: {private: true}
   },
 ]

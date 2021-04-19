@@ -51,9 +51,9 @@
         <v-toolbar-title>{{currentRouteName}}</v-toolbar-title>
       </v-app-bar>
     </div>
-    <v-main class="blue-grey darken-3">
+    <v-main class="blue-grey darken-3" style="height:100%">
       <vue-page-transition name="fade-in-right">
-        <router-view style="height: 100vh"></router-view>
+        <router-view style="height: 100%"></router-view>
       </vue-page-transition>
     </v-main>
   </v-app>
@@ -73,6 +73,7 @@ export default {
       { title: "Califiaciones", icon: "mdi-counter", link: '/calificaciones' },
       { title: "Estatus", icon: "mdi-state-machine", link: '/estatus' },
       { title: "Materias", icon: "mdi-book-multiple", link: '/materias' },
+      { title: "Help", icon: "mdi-help", link: '/help' },
     ],
     right: null,
   }),
@@ -99,6 +100,11 @@ export default {
 };
 </script>
 <style>
+html {
+margin: 0;
+padding: 0;
+height: 100%;
+}
 a {
   text-decoration: none;
 }

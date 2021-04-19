@@ -16,7 +16,6 @@
       </div>
     </v-container>
      <ModalCargarMaterias :active="active" @toggleModal="active = false"/>
-    <h3>Materias</h3>
     <v-footer padless fixed color="blue-grey darken-3">
       <v-container class="d-flex justify-end">
         <div>

@@ -1,13 +1,17 @@
 <template>
-  <h3>Califiaciones</h3>
+  <v-container>
+    <Grades />
+  </v-container>
 </template>
 
 <script>
+import Grades from "@/components/Global/Grades.vue";
 export default {
-
-}
+  components: {
+    Grades,
+  },
+};
 </script>
 
 <style>
-
 </style>
